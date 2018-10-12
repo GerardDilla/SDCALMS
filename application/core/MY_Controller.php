@@ -28,10 +28,11 @@ class MY_Controller extends CI_Controller {
             $middleParam = $this->middle;
         }
         //  $this->data['admin_data'] = $this->set_custom_session->navbar_session();
+        $sidebar = $this->session->userdata('SideView');
 
            $this->template['header'] = $this->load->view('layout/header.php', $this->data, true);
            $this->template['navbar'] = $this->load->view('layout/nav.php', $this->data, true);
-           $this->template['sidebar'] = $this->load->view('layout/side.php', $this->data, true);
+           $this->template['sidebar'] = $this->load->view('layout/sidebar/'.$sidebar, $this->data, true);
            $this->template['middle'] = $this->load->view($middleParam, $this->data, true);
            $this->template['footer'] = $this->load->view('layout/footer.php', $this->data, true);
            $this->load->view('layout/front', $this->template);

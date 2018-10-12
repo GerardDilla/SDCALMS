@@ -28,14 +28,15 @@ class Education extends MY_Controller  {
         $this->logincheck->token_check($this->session->userdata('LoginToken'));
         
         
-    }	
+    }
+
+    //COURSE INTENDED LEARNING OUTCOME//
     public function CILO(){
 
         $this->data['CILO_List'] = $this->EducationManagement->GetCILOList();
         $this->render($this->education_views->obe_list());
 
     }
-
     public function CILOUpdateForm(){
 
         $id = $this->input->post('cilo_id');
@@ -52,7 +53,6 @@ class Education extends MY_Controller  {
         redirect(base_url().'index.php/Education/CILO');
        
     }
-
     public function CILOForm(){
         
         $id = $this->input->post('cilo_id');
@@ -70,8 +70,9 @@ class Education extends MY_Controller  {
         redirect(base_url().'index.php/Education/CILO');
        
     }
+    //.COURSE INTENDED LEARNING OUTCOME//
 
-
+    //STUDENT OUTCOME//
     public function SO(){
 
         $this->data['SO_List'] = $this->EducationManagement->GetSOList();
@@ -111,6 +112,30 @@ class Education extends MY_Controller  {
         redirect(base_url().'index.php/Education/SO');
        
     }
+    //.STUDENT OUTCOME//
+
+    //INTENDED LEARNING OUTCOME//
+    public function ILO(){
+
+        $this->data['SO_List'] = $this->EducationManagement->GetSOList();
+        $this->render($this->education_views->obe_list_so());
+
+    }
+    public function ILOForm(){
+        
+        $id = $this->input->post('cilo_id');
+        $this->data['SO_Info'] = $this->EducationManagement->GetSOSpecific($id);
+        $this->render($this->education_views->obe_add_so());
+
+    }
+    public function ILOUpdateForm(){
+
+        $id = $this->input->post('so_id');
+        $this->data['SO_Info'] = $this->EducationManagement->GetSOSpecific($id);
+        $this->render($this->education_views->obe_edit_so());
+
+    }
+    //.INTENDED LEARNING OUTCOME//
 
 }
 ?>

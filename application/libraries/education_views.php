@@ -19,6 +19,7 @@ class education_views
 		return 'Education/CILO_EditForm';
 	}
 	//CILO
+
 	//CO
 	public function obe_add_so()
 	{
@@ -32,7 +33,24 @@ class education_views
 	{
 		return 'Education/SO_EditForm';
 	}
+
 	//CO
+
+	//ILO
+	public function obe_add_ilo()
+	{
+		return 'Education/SO_Form';
+	}
+	public function obe_list_ilo()
+	{
+		return 'Education/SO_List';
+	}
+	public function obe_edit_ilo()
+	{
+		return 'Education/SO_EditForm';
+	}
+	
+	//ILO
 
 
 

@@ -21,6 +21,7 @@ class Login extends CI_Controller {
 					'MiddleName' => $row['MiddleName'],
 					'LastName' => $row['LastName'],
 					'AccountType' => $row['AccountType_ID'],
+					'SideView' => $row['MenuView'],
 					'Email' => $row['Email'],
 					'LoginToken' => '1',
 					

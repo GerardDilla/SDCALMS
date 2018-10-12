@@ -20,8 +20,7 @@ class User extends MY_Controller  {
         //Note: Pass the login token userdata
         $this->load->model('Rules/logincheck');
         $this->logincheck->token_check($this->session->userdata('LoginToken'));
-        
-        
+            
     }	
     public function index()
     {
