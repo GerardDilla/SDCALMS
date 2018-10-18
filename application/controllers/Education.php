@@ -30,7 +30,7 @@ class Education extends MY_Controller  {
         
     }
 
-    //COURSE INTENDED LEARNING OUTCOME//
+    //////////COURSE INTENDED LEARNING OUTCOME//
     public function CILO(){
 
         $this->data['CILO_List'] = $this->EducationManagement->GetCILOList();
