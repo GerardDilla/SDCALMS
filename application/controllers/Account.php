@@ -84,7 +84,7 @@ class Account extends MY_Controller {
 		$pword = $this->input->post('pword');
 		$Atype = $this->input->post('Atype');
 		//echo $userid.':'.$fname.' '.$mname. ' '.$lname.'<br>'.$uname.':'.$email.':'.$pword.'<br>'.$Atype;
-		$this->AccountManagement->AccountUpdate($userid,$fname,$mname,$lname,$uname,$email,$pword,$Atype);
+		$this->AccountManagement->AccountUpdate($userid,$fname,$mname,$lname,$uname,$email,md5($pword),$Atype);
 		redirect('Account/AccountList','refresh');
 		
 
@@ -102,7 +102,7 @@ class Account extends MY_Controller {
 		$this->data['Account_Types'] = $this->AccountManagement->GetAccountTypes();
 		if(isset($register)){
 			$this->render($this->account_views->create_account());
-			$this->AccountManagement->AccountRegistration($fname,$lname,$uname,$email,md5($pword),$Atype);
+			$this->AccountManagement->AccountRegistration($fname,$mname,$lname,$uname,$email,md5($pword),$Atype);
 			redirect('Home','refresh');
 		}
 		else{

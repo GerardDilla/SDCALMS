@@ -15,7 +15,7 @@
 		</div><!-- #User Info -->
 		<!-- Menu -->
 		<div class="menu">
-			<ul class="list">
+			<ul class="list" style="max-height:700px; overflow-y:auto">
 				
 				<li class="active" style="display:none">
 					<a href="<?php echo base_url(); ?>index.php/User/Dashboard"><i class="material-icons">dashboard</i> <span>Dashboard</span></a>
@@ -77,15 +77,22 @@
 					</ul>
 				</li>
 				<li>
-					<a class="menu-toggle" href="javascript:void(0);"><i class="material-icons">inbox</i> <span>Rubrics</span></a>
-					<ul class="ml-menu"></ul>
+					<a href="<?php echo base_url(); ?>index.php/Admin/Generate_Rubrics"><i class="material-icons">inbox</i> <span>Rubrics</span></a>
+
 				</li>
 				<li>
-					<a class="menu-toggle" href="javascript:void(0);"><i class="material-icons">assignment</i> <span>Curriculum</span></a>
-					<ul class="ml-menu"></ul>
+					<a href="<?php echo base_url(); ?>index.php/Admin/CurriculumList"><i class="material-icons">assignment</i> <span>Curriculum</span></a>
 				</li>
 				<li>
-					<a class="menu-toggle" href="javascript:void(0);"><i class="material-icons">insert_chart</i> <span>Report</span></a>
+					<a class="menu-toggle" href="javascript:void(0);"><i class="material-icons">insert_chart</i> <span>Reports</span></a>
+					<ul class="ml-menu">
+						<li>
+							<a href="<?php echo base_url(); ?>index.php/Admin/ReportAccount"><span>Account List</span></a>
+						</li>
+						<li>
+							<a href="<?php echo base_url(); ?>index.php/Admin/ReportCourse"><span>Course List</span></a>
+						</li>
+					</ul>
 				</li>
 				
 			</ul>

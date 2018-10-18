@@ -114,28 +114,53 @@ class Education extends MY_Controller  {
     }
     //.STUDENT OUTCOME//
 
-    //INTENDED LEARNING OUTCOME//
-    public function ILO(){
+    //PROGRAM EDUCATIONAL OUTCOME//
+    public function PEO(){
 
-        $this->data['SO_List'] = $this->EducationManagement->GetSOList();
-        $this->render($this->education_views->obe_list_so());
+        $this->data['PEO_List'] = $this->EducationManagement->GetPEOList();
+        $this->render($this->education_views->obe_list_peo());
 
     }
-    public function ILOForm(){
+    public function PEOForm(){
         
-        $id = $this->input->post('cilo_id');
-        $this->data['SO_Info'] = $this->EducationManagement->GetSOSpecific($id);
-        $this->render($this->education_views->obe_add_so());
+        $this->render($this->education_views->obe_add_peo());
 
     }
-    public function ILOUpdateForm(){
+    public function AddPEO(){
 
-        $id = $this->input->post('so_id');
-        $this->data['SO_Info'] = $this->EducationManagement->GetSOSpecific($id);
-        $this->render($this->education_views->obe_edit_so());
+        $title = $this->input->post('peo_title');
+        $desc = $this->input->post('peo_description');
+        $uid = $this->session->userdata('UserID');
+        $this->EducationManagement->Add_PEO($title,$desc,$uid);
+        redirect(base_url().'index.php/Education/PEO');
+       
+    }
+    public function PEOUpdateForm(){
+
+        $id = $this->input->post('peo_id');
+        $this->data['PEO_Info'] = $this->EducationManagement->GetPEOSpecific($id);
+        foreach($this->data['PEO_Info']->result_array() as $row){
+            echo $row['PEO'];
+        }
+        
+        $this->render($this->education_views->obe_edit_peo());
 
     }
-    //.INTENDED LEARNING OUTCOME//
+    public function EditPEO(){
+
+        $id = $this->input->post('peo_id');
+        $title = $this->input->post('peo_title');
+        $desc = $this->input->post('peo_description');
+        $uid = $this->session->userdata('UserID');
+        echo $id.'<br>';
+        echo $title.'<br>';
+        echo $desc.'<br>';
+        echo $uid.'<br>';
+        $this->EducationManagement->UpdatePEO($id,$title,$desc,$uid);
+        //redirect(base_url().'index.php/Education/PEO');
+       
+    }
+    //.PROGRAM EDUCATIONAL OUTCOME//
 
 }
 ?>

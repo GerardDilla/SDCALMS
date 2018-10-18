@@ -5,6 +5,7 @@ class education_views
 {
 
 	//OBE VIEWS
+
 	//CILO
 	public function obe_add_cilo()
 	{
@@ -20,7 +21,7 @@ class education_views
 	}
 	//CILO
 
-	//CO
+	//SO
 	public function obe_add_so()
 	{
 		return 'Education/SO_Form';
@@ -33,24 +34,22 @@ class education_views
 	{
 		return 'Education/SO_EditForm';
 	}
+	//SO
 
-	//CO
-
-	//ILO
-	public function obe_add_ilo()
+	//PEO
+	public function obe_add_peo()
 	{
-		return 'Education/SO_Form';
+		return 'Education/PEO_Form';
 	}
-	public function obe_list_ilo()
+	public function obe_list_peo()
 	{
-		return 'Education/SO_List';
+		return 'Education/PEO_List';
 	}
-	public function obe_edit_ilo()
+	public function obe_edit_peo()
 	{
-		return 'Education/SO_EditForm';
+		return 'Education/PEO_EditForm';
 	}
-	
-	//ILO
+	//PEO
 
 
 

@@ -56,7 +56,7 @@
     <script src="<?php echo base_url(); ?>js/pages/forms/advanced-form-elements.js"></script>
     <script src="<?php echo base_url(); ?>js/js/custom/assessment.js"></script>
 
-
+    <!-- Comments  -->
     <script>
         var frm = $('#feedback_form');
         function ViewComment(id){
@@ -116,6 +116,7 @@
             
         }
     </script>
+    
 
     <script type="text/javascript">
         var frm = $('#CommentForm');
@@ -151,6 +152,7 @@
             });
         });
     </script>
+    <!--/ Comments  -->
 
 
         

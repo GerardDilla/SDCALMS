@@ -13,6 +13,11 @@ class general_views
 	{
 		return 'General/Dashboard';
 	}
+
+	public function admin_upload_file()
+	{
+		return 'body/Admin_View/Upload_File';
+	}
 	
 	
 

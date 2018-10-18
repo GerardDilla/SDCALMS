@@ -7,17 +7,20 @@ class Admin extends MY_Controller  {
     function __construct() {
 
         parent::__construct();
-        $this->load->library('set_views');
+        $this->load->library('curriculum_views');
+        $this->load->library('report_views');
+        $this->load->library('general_views');
+        $this->load->library('rubric_views');
         $this->load->library('email');
         $this->load->library('session');
         $this->load->library('pagination');   
         $this->load->library('form_validation');
         $this->load->helper(array('form', 'url'));
-        $this->load->model('Admin_Model/Rubrics_model');
-        $this->load->model('Admin_Model/Reports_model');
+        $this->load->model('Management/Rubrics_model');
+        $this->load->model('Management/Reports_model');
         $this->load->helper('array');
 
-                           }	
+    }	
     
                                                  /*Admin*/
 
@@ -27,51 +30,6 @@ class Admin extends MY_Controller  {
 	{
      $this->login();
     }
-   
-    /*---------------------------------------------Admin Dashboard------------------------------------------------*/
-
-    public function Dashboard()
-    {
-     $this->render($this->set_views->admin_dashboard());
-    }
-
-
-    /*---------------------------------------------------Admin Creat Account Module-------------------------------*/
-    
-    public function Create_Account()
-    {
-     $this->render($this->set_views->admin_creatacc());
-    }
-
-    public function Create_Account_Input()
-    {
-     $this->render($this->set_views->admin_creatacc_input());
-    }
-
-    /*---------------------------------------------------Admin Authentic User Module-------------------------------*/
-
-    public function Authentic_User()
-    {
-     $this->render($this->set_views->admin_autenthic_user());
-    }
-
-    /*---------------------------------------------------Admin Update Personal Data Module-------------------------------*/
-
-    public function Personal_Data()
-    {
-     $this->render($this->set_views->admin_updatepersonal_data());
-    }
-
-    /*---------------------------------------------------Admin Search User Module-------------------------------*/
-
-    public function Search_User()
-    {
-    $this->render($this->set_views->admin_searchuser());
-    }
-   /*---------------------------------------------------Admin Generate Rubrics Module-------------------------------*/
-  
-  
-  
   
    public function Generate_Rubrics()
    {
@@ -79,7 +37,7 @@ class Admin extends MY_Controller  {
    $this->session->unset_userdata('message');
    $this->form_validation->set_rules('rubrics_title','Rubrics', 'required|trim|max_length[150]');
    if ($this->form_validation->run() == FALSE){
-   $this->render($this->set_views->admin_generate_rubrics());
+   $this->render($this->rubric_views->admin_generate_rubrics());
    }else{
     $this->Rubrics_model->addrubrics_title();    
     $this->session->set_flashdata('message','Rubrics Added Successfully');
@@ -94,7 +52,7 @@ class Admin extends MY_Controller  {
    $this->$data['v_rubrics_escale'] = $this->Rubrics_model->view_rubrics_escale();
    $this->$data['v_rubrics_description'] = $this->Rubrics_model->view_rubrics_description();                                            
    $this->$data['test_output'] =  $this->Rubrics_model->getdescription();
-   $this->render($this->set_views->admin_view_rubrics());
+   $this->render($this->rubric_views->admin_view_rubrics());
    }
 
    public function add_criteria()
@@ -102,7 +60,7 @@ class Admin extends MY_Controller  {
     $this->$data['v_rubrics'] = $this->Rubrics_model->view_rubrics();
     $this->$data['v_rubrics_escale'] = $this->Rubrics_model->view_rubrics_escale();
     $this->$data['test_output'] =  $this->Rubrics_model->getdescription();
-    $this->render($this->set_views->admin_edit_rubrics());
+    $this->render($this->rubric_views->admin_edit_rubrics());
    }
    
    public function insert_criteria()
@@ -111,7 +69,7 @@ class Admin extends MY_Controller  {
     $this->$data['v_rubrics'] = $this->Rubrics_model->view_rubrics();
     $this->$data['v_rubrics_escale'] = $this->Rubrics_model->view_rubrics_escale();
     $this->$data['test_output'] =  $this->Rubrics_model->getdescription();
-    $this->render($this->set_views->admin_edit_rubrics());
+    $this->render($this->rubric_views->admin_edit_rubrics());
    
    }
 
@@ -121,7 +79,7 @@ class Admin extends MY_Controller  {
     $this->$data['v_rubrics'] = $this->Rubrics_model->view_rubrics();
     $this->$data['v_rubrics_escale'] = $this->Rubrics_model->view_rubrics_escale();
     $this->$data['test_output'] =  $this->Rubrics_model->getdescription();
-    $this->render($this->set_views->admin_edit_rubrics());
+    $this->render($this->rubric_views->admin_edit_rubrics());
    
    }
    
@@ -138,20 +96,20 @@ class Admin extends MY_Controller  {
    $this->$data['v_rubrics'] = $this->Rubrics_model->view_rubrics();
    $this->$data['v_rubrics_escale'] = $this->Rubrics_model->view_rubrics_escale();
    $this->$data['v_rubrics_description'] = $this->Rubrics_model->view_rubrics_description();   
-   $this->render($this->set_views->admin_rubrics_criteria());
+   $this->render($this->rubric_views->admin_rubrics_criteria());
    }
 
    public function AddUpdate()
    {
-    $add = $this->input->post('add_escale');
-    $update = $this->input->post('update_escale');
+        $add = $this->input->post('add_escale');
+        $update = $this->input->post('update_escale');
 
-    if(isset($add)){
-        $this->Add_Escale();
-    }
-    else if(isset($update)) {
-        $this->Update_Escale();
-    }
+        if(isset($add)){
+            $this->Add_Escale();
+        }
+        else if(isset($update)) {
+            $this->Update_Escale();
+        }
    }
 
 
@@ -172,13 +130,14 @@ class Admin extends MY_Controller  {
    {  
     $this->form_validation->set_rules('rubrics_description','Rubrics Description','required|trim|max_length[400]');
     if ($this->form_validation->run() == FALSE){ 
-    $this->render($this->set_views->admin_rubrics_criteria());
-    }else{
-    $this->Rubrics_model->addrubrics();
-    $this->session->set_flashdata('message','Rubrics Added Successfully');
-    redirect('Admin/Generate_Rubrics','Refresh');   
-         }
+    $this->render($this->rubric_views->admin_rubrics_criteria());
     }
+    else{
+        $this->Rubrics_model->addrubrics();
+        $this->session->set_flashdata('message','Rubrics Added Successfully');
+        redirect('Admin/Generate_Rubrics','Refresh');   
+    }
+  }
 
 
   
@@ -194,7 +153,7 @@ class Admin extends MY_Controller  {
     $this->$data['v_rubrics_escale'] = $this->Rubrics_model->view_rubrics_escale();
     $this->$data['v_rubrics_description'] = $this->Rubrics_model->view_rubrics_description();                                            
     $this->$data['test_output'] =  $this->Rubrics_model->getdescription();
-    $this->render($this->set_views->admin_edit_rubrics());
+    $this->render($this->rubric_views->admin_edit_rubrics());
     }else{
    // $this->Rubrics_model->addrubrics();
    // $this->session->set_flashdata('message','Rubrics Added Successfully');
@@ -202,20 +161,18 @@ class Admin extends MY_Controller  {
     }
   
    } 
-
-
    public function ReportAccount()
    {
     $this->$data['get_Account'] = $this->Reports_model->get_account_lists();
     $this->$data['account_list'] = $this->Reports_model->account_lists();
-    $this->render($this->set_views->admin_report_account());
+    $this->render($this->report_views->admin_report_account());
   
    } 
 
    public function ReportCourse()
    {
     $this->$data['course_list'] = $this->Reports_model->course_lists();
-    $this->render($this->set_views->admin_report_course());
+    $this->render($this->report_views->admin_report_course());
    } 
 
    public function CurriculumList()
@@ -223,28 +180,24 @@ class Admin extends MY_Controller  {
     $this->$data['program'] = $this->Reports_model->curriculum_lists_dropdowns();
     $this->$data['curriculum_year'] = $this->Reports_model->curriculum_lists_dropdown();
     $this->$data['curriculum_list'] = $this->Reports_model->curriculum_lists();
-    $this->render($this->set_views->admin_curriculum_list());
+    $this->render($this->curriculum_views->admin_curriculum_list());
    } 
 
    public function CurriculumCourseList()
    {
     $this->$data['curriculum_course_list'] = $this->Reports_model->subject_list();
-    $this->render($this->set_views->admin_curriculum_course_list());
+    $this->render($this->curriculum_views->admin_curriculum_course_list());
    } 
 
    public function UploadFile()
    {
     $this->$data['file_upload'] = $this->Reports_model->get_file_upload();
-    $this->render($this->set_views->admin_upload_file());
    } 
-
    public function DeleteUploadFile()
    {
     $this->Reports_model->set_file();
     redirect('Admin/UploadFile');
-   } 
-
-
+   }
    public function do_upload(){
     
     $config['upload_path'] = 'uploads';

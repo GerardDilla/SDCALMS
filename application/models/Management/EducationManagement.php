@@ -17,6 +17,13 @@ class EducationManagement extends CI_Model{
     
         return $query;
     }
+    public function GetPEOList(){
+
+        $this->db->where('Active', '1');
+        $query = $this->db->get('lms_peo');
+    
+        return $query;
+    }
     public function GetCILOSpecific($id){
         
         $this->db->where('CILO_ID', $id);
@@ -31,6 +38,13 @@ class EducationManagement extends CI_Model{
         $this->db->where('Active', '1');
         $query = $this->db->get('lms_student_outcomes');
     
+        return $query;
+    }
+    public function GetPEOSpecific($id){
+        
+        $this->db->where('PEO_ID', $id);
+        $this->db->where('Active', '1');
+        $query = $this->db->get('lms_peo');
         return $query;
     }
     public function Add_CILO($title,$desc,$uid){
@@ -48,8 +62,19 @@ class EducationManagement extends CI_Model{
         $data = array(
             'SO' => $title,
             'Description' => $desc,
+            'AccountID' => $uid
         );
         $this->db->insert('lms_student_outcomes', $data);
+
+    }
+    public function Add_PEO($title,$desc,$uid){
+
+        $data = array(
+            'PEO' => $title,
+            'Description' => $desc,
+            'AccountID' => $uid
+        );
+        $this->db->insert('lms_peo', $data);
 
     }
     public function UpdateCILO($id,$title,$desc,$uid)
@@ -65,6 +90,13 @@ class EducationManagement extends CI_Model{
         $this->db->set('Description', $desc);
         $this->db->where('SO_ID', $id);
 		$this->db->update('lms_student_outcomes');
+    }
+    public function UpdatePEO($id,$title,$desc,$uid)
+	{
+        $this->db->set('PEO', $title);
+        $this->db->set('Description', $desc);
+        $this->db->where('PEO_ID', $id);
+		$this->db->update('lms_peo');
 	}
 
 

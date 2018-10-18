@@ -23,11 +23,12 @@ class AccountManagement extends CI_Model{
 		$this->db->where('Course_ID', $course);
 		$this->db->update('lms_courses');
 	}
-    public function AccountRegistration($fname,$lname,$uname,$email,$pword,$Atype){
+    public function AccountRegistration($fname,$mname,$lname,$uname,$email,$pword,$Atype){
 
         $current = date("y-m-d",NOW());
         $data = array(
             'FirstName' => $fname,
+            'MiddleName' => $mname,
             'LastName' => $lname,
             'Username' => $uname,
             'Email' => $email,
